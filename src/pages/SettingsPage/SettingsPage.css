@@ -1,0 +1,12 @@
+#settings-card {
+  width: 600px;
+  margin: auto;
+  padding: 3rem;
+  background-color: #555555;
+  margin-top: 5rem;
+  border-radius: 0.5rem;
+}
+#bt-save-settings {
+  background-color: #eb5757;
+  margin-top: 1rem;
+}
