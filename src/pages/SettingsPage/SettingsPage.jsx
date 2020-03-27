@@ -12,7 +12,7 @@ class SettingsPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = SettingsService.readSettings();
+    this.state = SettingsService.getSettings();
 
     this.handleRootSelect = this.handleRootSelect.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
