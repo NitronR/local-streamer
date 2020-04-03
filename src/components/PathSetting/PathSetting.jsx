@@ -1,13 +1,13 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
 
+import PathSelectButton from "../PathSelectButton";
 import PropTypes from "prop-types";
 import React from "react";
-import folderIcon from "../../images/folder_icon.png";
 
 class PathSetting extends React.Component {
   constructor(props) {
     super(props);
-    this.selectPath = this.selectPath.bind(this);
+    this.onPathSelect = this.onPathSelect.bind(this);
   }
   render() {
     return (
@@ -35,25 +35,11 @@ class PathSetting extends React.Component {
               </Col>
               {/* path select button */}
               <Col xs="auto">
-                <Button
-                  variant="dark"
-                  style={{
-                    margin: "auto",
-                    backgroundColor: "#333333",
-                    width: "3rem",
-                    height: "3rem"
-                  }}
-                  onClick={this.selectPath}
-                >
-                  <img
-                    src={folderIcon}
-                    style={{
-                      width: "1.2rem",
-                      height: "1.2rem",
-                      marginTop: "-5px"
-                    }}
-                  />
-                </Button>
+                <PathSelectButton
+                  size="normal"
+                  onPathSelect={this.onPathSelect}
+                  defaultPath={this.props.path}
+                />
               </Col>
             </Row>
           </Card.Text>
@@ -61,21 +47,9 @@ class PathSetting extends React.Component {
       </Card>
     );
   }
-  selectPath() {
-    // show select path dialog
-    const { dialog } = window.require("electron").remote;
-    dialog
-      .showOpenDialog({
-        default: this.props.path,
-        properties: ["openDirectory"]
-      })
-      .then(result => {
-        if (!result.canceled) {
-          let path = result.filePaths[0];
-          // callback to parent
-          this.props.onPathSelect(path);
-        }
-      });
+  onPathSelect(path) {
+    // callback to parent
+    this.props.onPathSelect(path);
   }
 }
 

@@ -1,3 +1,4 @@
+import PathBar from "./PathBar";
 import React from "react";
 import SettingsService from "../../data-services/SettingsService";
 
@@ -12,7 +13,11 @@ class FileBrowser extends React.Component {
     this.state = { currentPath: settings.rootPath };
   }
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <PathBar rootPath={this.state.currentPath} />
+      </div>
+    );
   }
 }
 

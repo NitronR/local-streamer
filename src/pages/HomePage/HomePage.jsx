@@ -15,7 +15,7 @@ class HomePage extends React.Component {
 
           {/* Recents section */}
           <Col style={{ padding: "1rem" }}>
-            <h2>Recents</h2n>
+            <h2>Recents</h2>
           </Col>
 
           {/* Files sectio */}

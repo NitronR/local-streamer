@@ -3,7 +3,7 @@ import "./SettingsPage.css";
 
 import { Button, Container, Jumbotron } from "react-bootstrap";
 
-import PathSetting from "../../components/SettingItem/PathSetting";
+import PathSetting from "../../components/PathSetting";
 import React from "react";
 import SettingsService from "../../data-services/SettingsService";
 import cogoToast from "cogo-toast";
