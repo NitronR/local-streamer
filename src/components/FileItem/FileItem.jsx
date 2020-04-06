@@ -14,7 +14,7 @@ function FileItem(props) {
     <Card
       className="file-item-card"
       text="white"
-      style={{ "background-color": "#444444", marginTop: "1rem", padding: 0 }}
+      style={{ "background-color": "#444444", marginTop: "4px", padding: 0 }}
       onClick={()=>props.onFileItemClick(file)}
     >
       {/* title */}

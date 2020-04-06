@@ -1,0 +1,22 @@
+.round-check {
+  text-align: center;
+  padding: 5px;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  box-shadow: 2px 2pxblack;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+.round-check-checked {
+  background-color: #2d9cdb !important;
+}
+.round-check-unchecked {
+  background-color: #9b9b9b !important;
+}
+.round-check-checked:hover {
+  background-color: #64b3e0 !important;
+}
+.round-check-unchecked:hover {
+  background-color: #9b9b9b !important;
+}

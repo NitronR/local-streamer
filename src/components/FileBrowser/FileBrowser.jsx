@@ -33,7 +33,6 @@ class FileBrowser extends React.Component {
         {/* File items */}
         {this.state.filePaths.map((path) => (
           <FileItem
-            style={{ margin: "2px" }}
             path={path}
             onFileItemClick={(file) => {
               if (file.isDir) this.changePath(file.path);

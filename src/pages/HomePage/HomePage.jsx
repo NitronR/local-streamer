@@ -22,7 +22,13 @@ class HomePage extends React.Component {
           {/* Recents section */}
           <Col style={{ padding: "1rem" }}>
             <h2>Recents</h2>
-            <RecentsList recents={this.state.recents} />
+            <RecentsList
+              recents={this.state.recents}
+              onRecentsChange={(recents) => {
+                this.setState({ recents });
+                RecentsService.saveRecents(recents);
+              }}
+            />
           </Col>
 
           {/* Files section */}

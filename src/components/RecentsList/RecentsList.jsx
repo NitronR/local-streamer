@@ -8,8 +8,15 @@ function RecentsList(props) {
   return (
     <div>
       {/* Recent items */}
-      {props.recents.map((recent) => (
-        <RecentItem recent={recent} />
+      {props.recents.map((recent, index) => (
+        <RecentItem
+          recent={recent}
+          onWatchedChange={(value) => {
+            let recents = props.recents;
+            recents[index].watched = value;
+            props.onRecentsChange(recents);
+          }}
+        />
       ))}
     </div>
   );
@@ -17,6 +24,7 @@ function RecentsList(props) {
 
 RecentsList.propTypes = {
   recents: PropTypes.array.isRequired,
+  onRecentsChange: PropTypes.func.isRequired,
 };
 
 export default RecentsList;
