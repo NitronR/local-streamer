@@ -1,9 +1,11 @@
+import { getFileList, launchFile } from "../../filesystem/FileUtils";
+
 import File from "../../filesystem/File";
 import FileItem from "../FileItem";
 import PathBar from "./PathBar";
+import PropTypes from "prop-types";
 import React from "react";
 import SettingsService from "../../data-services/SettingsService";
-import { getFileList } from "../../filesystem/FileUtils";
 
 class FileBrowser extends React.Component {
   constructor(props) {
@@ -17,6 +19,8 @@ class FileBrowser extends React.Component {
       currentPath: settings.rootPath,
       filePaths: this.getFilePaths(settings.rootPath),
     };
+
+    this.getFilePaths = this.getFilePaths.bind(this);
   }
 
   render() {
@@ -32,7 +36,10 @@ class FileBrowser extends React.Component {
           <FileItem
             style={{ margin: "2px" }}
             path={path}
-            onDirClick={(path) => this.changePath(path)}
+            onFileItemClick={(file) => {
+              if (file.isDir) this.changePath(file.path);
+              else launchFile(file.path);
+            }}
           />
         ))}
       </div>
@@ -64,10 +71,20 @@ class FileBrowser extends React.Component {
     files = files.filter((file) => !file.isDir);
 
     let filePaths = dirs.map((dirFile) => dirFile.path);
+
+    // keep only the allowed file types
+    files = files.filter((file) =>
+      this.props.allowedFileTypes.includes(file.extension)
+    );
+
     filePaths.push(...files.map((file) => file.path));
 
     return filePaths;
   }
 }
+
+FileBrowser.propTypes = {
+  allowedFileTypes: PropTypes.array,
+};
 
 export default FileBrowser;

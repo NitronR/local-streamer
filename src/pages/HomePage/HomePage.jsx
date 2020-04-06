@@ -12,10 +12,12 @@ function HomePage() {
           <h2>Recents</h2>
         </Col>
 
-        {/* Files sectio */}
+        {/* Files section */}
         <Col style={{ padding: "1rem" }}>
           <h2>Files</h2>
-          <FileBrowser />
+          <FileBrowser
+            allowedFileTypes={["mp4", "mov", "avi", "wmv", "mkv", "flv"]}
+          />
         </Col>
       </Row>
     </Container>

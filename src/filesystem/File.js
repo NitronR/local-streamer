@@ -5,6 +5,7 @@ export default class File {
         this.name = path.substring(path.lastIndexOf('\\') + 1);
         this.path = path;
         this.exists = this.fs.existsSync(path);
+        this.extension = this.name.substring(this.name.lastIndexOf(".") + 1);
         this.isDir = false;
         try {
             if (this.exists)

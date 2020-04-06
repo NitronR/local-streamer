@@ -1,7 +1,6 @@
 import "./FileItem.css";
 
-import { Card, Col, Row } from "react-bootstrap";
-
+import { Card } from "react-bootstrap";
 import File from "../../filesystem/File";
 import PropTypes from "prop-types";
 import React from "react";
@@ -11,16 +10,12 @@ import folderIcon from "../../images/folder_icon.png";
 function FileItem(props) {
   let file = new File(props.path);
 
-  function handleClick() {
-    if (file.isDir) props.onDirClick(file.path);
-  }
-
   return (
     <Card
       className="file-item-card"
       text="white"
       style={{ "background-color": "#444444", marginTop: "1rem", padding: 0 }}
-      onClick={handleClick}
+      onClick={()=>props.onFileItemClick(file)}
     >
       {/* title */}
       <Card.Text>
@@ -59,30 +54,6 @@ function FileItem(props) {
             {file.name}
           </div>
         </div>
-        {/* <Row>
-          <Col xs="auto" style={{ backgroundColor: "#444444", height: "100%" }}>
-            <img
-              src={file.isDir ? folderIcon : fileIcon}
-              style={{
-                margin: "auto",
-                width: "2rem",
-                height: "2rem",
-                margin: "auto",
-              }}
-              alt="File icon"
-            />
-          </Col>
-          <Col
-            xs={10}
-            style={{
-              "background-color": "#555555",
-              height: "100%",
-              padding: "1rem",
-            }}
-          >
-            {file.name}
-          </Col>
-        </Row> */}
       </Card.Text>
     </Card>
   );
@@ -90,7 +61,7 @@ function FileItem(props) {
 
 FileItem.propTypes = {
   path: PropTypes.string.isRequired,
-  onDirClick: PropTypes.func,
+  onFileItemClick: PropTypes.func,
 };
 
 export default FileItem;

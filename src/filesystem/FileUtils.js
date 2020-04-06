@@ -1,4 +1,4 @@
-const { remote } = window.require('electron');
+const { remote, shell } = window.require('electron');
 let fs = remote.require('fs');
 
 export function getFileList(path) {
@@ -9,4 +9,8 @@ export function getFileList(path) {
     }
 
     return dirs;
+}
+
+export function launchFile(path) {
+    shell.openItem(path);
 }
