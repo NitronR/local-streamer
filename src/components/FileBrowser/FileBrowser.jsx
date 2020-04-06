@@ -1,11 +1,10 @@
-import { getFileList, launchFile } from "../../filesystem/FileUtils";
-
 import File from "../../filesystem/File";
 import FileItem from "../FileItem";
 import PathBar from "./PathBar";
 import PropTypes from "prop-types";
 import React from "react";
 import SettingsService from "../../data-services/SettingsService";
+import { getFileList } from "../../filesystem/FileUtils";
 
 class FileBrowser extends React.Component {
   constructor(props) {
@@ -38,7 +37,8 @@ class FileBrowser extends React.Component {
             path={path}
             onFileItemClick={(file) => {
               if (file.isDir) this.changePath(file.path);
-              else launchFile(file.path);
+
+              this.props.onFileItemClick(file);
             }}
           />
         ))}
@@ -85,6 +85,7 @@ class FileBrowser extends React.Component {
 
 FileBrowser.propTypes = {
   allowedFileTypes: PropTypes.array,
+  onFileItemClick: PropTypes.func,
 };
 
 export default FileBrowser;
