@@ -13,8 +13,8 @@ function NavBar(props) {
         {/* brand */}
         <Navbar.Brand as={NavLink} to="/">
           {/* brand icon */}
-          <img src={icon} width="30" height="30" />{' '}
-          Local Streamer
+          <img src={icon} width="30" height="30" alt="brand icon" /> Local
+          Streamer
         </Navbar.Brand>
 
         {/* toggle button */}

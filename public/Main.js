@@ -2,6 +2,8 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+require('dotenv').config()
+
 function createWindow() {
     // Create the browser window.     
     win = new BrowserWindow({
@@ -19,7 +21,11 @@ function createWindow() {
         fs.mkdirSync(win.dataPath);
     }
 
-    // and load the index.html of the app.     
-    win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
+    // and load the index.html of the app. 
+    if (process.env.MODE === "debug") {
+        win.loadURL(process.env.DEBUG_URL);
+    } else {
+        win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
+    }
 }
 app.on('ready', createWindow);

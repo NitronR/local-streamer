@@ -7,7 +7,8 @@ import folderIcon from "../../images/folder_icon.png";
 
 function PathSelectButton(props) {
   if (!props.size) props.size = "normal";
-  if (!props.defaultPath) props.defaultPath = "";
+
+  let defaultPath = props.defaultPath ? props.defaultPath : "";
 
   // handles click, shows path select dialog and returns path via callback
   function onButtonClick() {
@@ -15,10 +16,10 @@ function PathSelectButton(props) {
     const { dialog } = window.require("electron").remote;
     dialog
       .showOpenDialog({
-        default: props.defaultPath,
-        properties: ["openDirectory"]
+        default: defaultPath,
+        properties: ["openDirectory"],
       })
-      .then(result => {
+      .then((result) => {
         if (!result.canceled) {
           let path = result.filePaths[0];
           // callback to parent
@@ -30,7 +31,7 @@ function PathSelectButton(props) {
   let style = {
     margin: "auto",
     backgroundColor: "#333333",
-    padding: 0
+    padding: 0,
   };
 
   if ("btStyle" in props) {
@@ -48,8 +49,9 @@ function PathSelectButton(props) {
         src={folderIcon}
         className={"img-path-sel-" + props.size}
         style={{
-          marginTop: "-5px"
+          marginTop: "-5px",
         }}
+        alt="Folder icon"
       />
     </Button>
   );
@@ -59,7 +61,7 @@ PathSelectButton.propTypes = {
   size: PropTypes.oneOf(["small", "normal"]),
   defaultPath: PropTypes.string,
   onPathSelect: PropTypes.func.isRequired,
-  btStyle: PropTypes.object
+  btStyle: PropTypes.object,
 };
 
 export default PathSelectButton;

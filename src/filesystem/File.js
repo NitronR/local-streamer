@@ -6,8 +6,12 @@ export default class File {
         this.path = path;
         this.exists = this.fs.existsSync(path);
         this.isDir = false;
-        if (this.exists)
-            this.isDir = this.fs.lstatSync(path).isDirectory();
+        try {
+            if (this.exists)
+                this.isDir = this.fs.lstatSync(path).isDirectory();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     getParentPath() {

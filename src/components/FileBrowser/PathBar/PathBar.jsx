@@ -17,6 +17,9 @@ class PathBar extends React.Component {
     this.handleBackClick = this.handleBackClick.bind(this);
     this.changePath = this.changePath.bind(this);
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ currentDir: new File(nextProps.rootPath) });
+  }
   render() {
     return (
       <div>
@@ -29,7 +32,7 @@ class PathBar extends React.Component {
               size="small"
               btStyle={{
                 margin: "3px 0px 0px 0px",
-                backgroundColor: "#444444"
+                backgroundColor: "#444444",
               }}
             />
 
@@ -43,7 +46,7 @@ class PathBar extends React.Component {
                 backgroundColor: "#444444",
                 fontSize: "0.8rem",
                 marginLeft: "2px",
-                padding: 0
+                padding: 0,
               }}
               onClick={this.handleBackClick}
             >
@@ -54,19 +57,19 @@ class PathBar extends React.Component {
             {(() => {
               let dirNames = this.state.currentDir.path
                 .split("\\")
-                .filter(e => e != "");
+                .filter((e) => e !== "");
               let breadCrumbs = [
-                { path: dirNames[0] + "\\", dirName: dirNames[0] }
+                { path: dirNames[0] + "\\", dirName: dirNames[0] },
               ];
 
               for (let index = 1; index < dirNames.length; index++) {
                 breadCrumbs.push({
                   path: breadCrumbs[index - 1].path + dirNames[index] + "\\",
-                  dirName: dirNames[index]
+                  dirName: dirNames[index],
                 });
               }
 
-              return breadCrumbs.map(breadCrumb => (
+              return breadCrumbs.map((breadCrumb) => (
                 <Button
                   variant="dark"
                   style={{
@@ -76,7 +79,7 @@ class PathBar extends React.Component {
                     marginLeft: "2px",
                     marginTop: "3px",
                     paddingTop: 0,
-                    paddingBottom: 0
+                    paddingBottom: 0,
                   }}
                   onClick={() => this.changePath(breadCrumb.path)}
                 >
@@ -89,17 +92,21 @@ class PathBar extends React.Component {
       </div>
     );
   }
+  // set path as parent
   handleBackClick() {
     let parent = this.state.currentDir.getParent();
     if (parent.exists) this.changePath(parent.path);
   }
   changePath(path) {
     this.setState({ currentDir: new File(path) });
+
+    if (this.props.onPathChange) this.props.onPathChange(path);
   }
 }
 
 PathBar.propTypes = {
-  rootPath: PropTypes.string.isRequired
+  rootPath: PropTypes.string.isRequired,
+  onPathChange: PropTypes.func,
 };
 
 export default PathBar;

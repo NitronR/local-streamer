@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 
 import PathSelectButton from "../PathSelectButton";
 import PropTypes from "prop-types";

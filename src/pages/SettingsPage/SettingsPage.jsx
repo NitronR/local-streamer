@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./SettingsPage.css";
 
-import { Button, Container, Jumbotron } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 import PathSetting from "../../components/PathSetting";
 import React from "react";

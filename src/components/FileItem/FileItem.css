@@ -1,0 +1,11 @@
+.file-item-card:hover {
+  cursor: pointer;
+}
+.file-item-content {
+  transition: all 0.3s;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.file-item-card:hover .file-item-content {
+  background-color: #eb5757 !important;
+}
