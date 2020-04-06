@@ -1,5 +1,6 @@
 import "./PathBar.css";
 
+import BreadCrumbs from "../../BreadCrumbs";
 import { Button } from "react-bootstrap";
 import File from "../../../filesystem/File";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -54,39 +55,10 @@ class PathBar extends React.Component {
             </Button>
 
             {/* breadcrumbs */}
-            {(() => {
-              let dirNames = this.state.currentDir.path
-                .split("\\")
-                .filter((e) => e !== "");
-              let breadCrumbs = [
-                { path: dirNames[0] + "\\", dirName: dirNames[0] },
-              ];
-
-              for (let index = 1; index < dirNames.length; index++) {
-                breadCrumbs.push({
-                  path: breadCrumbs[index - 1].path + dirNames[index] + "\\",
-                  dirName: dirNames[index],
-                });
-              }
-
-              return breadCrumbs.map((breadCrumb) => (
-                <Button
-                  variant="dark"
-                  style={{
-                    height: "2rem",
-                    backgroundColor: "#444444",
-                    fontSize: "0.8rem",
-                    marginLeft: "2px",
-                    marginTop: "3px",
-                    paddingTop: 0,
-                    paddingBottom: 0,
-                  }}
-                  onClick={() => this.changePath(breadCrumb.path)}
-                >
-                  {breadCrumb.dirName}
-                </Button>
-              ));
-            })()}
+            <BreadCrumbs
+              path={this.state.currentDir.path}
+              onCrumbClick={this.changePath}
+            />
           </div>
         )}
       </div>

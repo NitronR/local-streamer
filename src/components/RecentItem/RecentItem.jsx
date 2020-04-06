@@ -3,6 +3,7 @@ import "./RecentItem.css";
 import { Card } from "react-bootstrap";
 import React from "react";
 import RoundCheck from "../RoundCheck";
+import { formatDate } from "../../utils/Utils";
 
 function RecentItem(props) {
   return (
@@ -21,20 +22,24 @@ function RecentItem(props) {
       <div className="recent-item-info">
         {/* top info section */}
         <div style={{ padding: "1rem" }}>
-          {/* breadcrumbs */}
-          <div>{props.recent.file.path}</div>
+          {/* TODO breadcrumbs scrollable */}
+
           {/* name */}
           <div>{props.recent.file.name}</div>
         </div>
+
+        {/* action buttons */}
+        <div className="recent-item-buttons-container"></div>
+        
         {/* bottom bar */}
         <div className="recent-item-bottom-bar">
-          {/* action buttons */}
-          <div className="recent-item-buttons-container"></div>
-
           {/* date */}
+          <span>{formatDate(props.recent.date, "mmm dd, yyyy")}</span>
 
-          <div>{props.recent.date.toString()}</div>
           {/* time */}
+          <span style={{ justifySelf: "end" }}>
+            {formatDate(props.recent.date, "h:MM TT")}
+          </span>
         </div>
       </div>
     </Card>

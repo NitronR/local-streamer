@@ -10,7 +10,7 @@ export default class Recent {
     getDataObject() {
         return {
             path: this.path,
-            timestamp: this.date.getMilliseconds(),
+            timestamp: this.date.getTime(),
             watched: this.watched
         }
     }
