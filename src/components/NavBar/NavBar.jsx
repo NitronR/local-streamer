@@ -2,7 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, withRouter } from "react-router-dom";
+import { faCog, faHome } from "@fortawesome/free-solid-svg-icons";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import icon from "../../images/icon.png";
 
@@ -25,11 +27,13 @@ function NavBar(props) {
           <Nav className="ml-auto">
             {/* home nav */}
             <Nav.Link as={NavLink} to="/home">
-              Home
+              <FontAwesomeIcon icon={faHome} />
+              &nbsp; Home
             </Nav.Link>
             {/* home nav */}
             <Nav.Link as={NavLink} to="/settings">
-              Settings
+              <FontAwesomeIcon icon={faCog} />
+              &nbsp; Settings
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

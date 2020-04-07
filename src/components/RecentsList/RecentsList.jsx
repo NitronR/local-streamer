@@ -7,6 +7,7 @@ import RecentItem from "../RecentItem";
 import { launchFile } from "../../filesystem/FileUtils";
 
 function RecentsList(props) {
+  if (props.recents.length === 0) return "No recents.";
   return (
     <div>
       {/* Recent items */}
