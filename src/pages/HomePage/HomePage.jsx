@@ -1,11 +1,11 @@
 import { Col, Container, Row } from "react-bootstrap";
+import { allowedTypes, launchFile } from "../../filesystem/FileUtils";
 
 import FileBrowser from "../../components/FileBrowser";
 import React from "react";
 import Recent from "../../models/Recent";
 import RecentsList from "../../components/RecentsList/RecentsList";
 import RecentsService from "../../data-services/RecentsService";
-import { launchFile } from "../../filesystem/FileUtils";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class HomePage extends React.Component {
           <Col style={{ padding: "1rem" }}>
             <h2>Files</h2>
             <FileBrowser
-              allowedFileTypes={["mp4", "mov", "avi", "wmv", "mkv", "flv"]}
+              allowedFileTypes={allowedTypes}
               onFileItemClick={this.handleFileItemClick}
             />
           </Col>

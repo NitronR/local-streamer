@@ -1,4 +1,4 @@
-import File from "../filesystem/File";
+import File, { isAllowedType } from "../filesystem/File";
 
 export default class Recent {
     constructor(path, date, watched) {
@@ -6,6 +6,14 @@ export default class Recent {
         this.file = new File(path);
         this.watched = watched;
         this.date = date;
+        this.prevCount = 0;
+        this.nextCount = 0;
+
+        if (this.file.exists) {
+            const { index, total } = this.file.siblingsInfo(isAllowedType);
+            this.prevCount = index;
+            this.nextCount = total - index - 1;
+        }
     }
     getDataObject() {
         return {

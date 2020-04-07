@@ -14,6 +14,7 @@ function RoundCheck(props) {
       onClick={() => {
         props.onChange(!props.checked);
       }}
+      {...props}
     >
       <FontAwesomeIcon icon={faCheck} />
     </span>

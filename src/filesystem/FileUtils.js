@@ -14,3 +14,5 @@ export function getFileList(path) {
 export function launchFile(path) {
     shell.openItem(path);
 }
+
+export let allowedTypes = ["mp4", "mov", "avi", "wmv", "mkv", "flv"];
