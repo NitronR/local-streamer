@@ -23,6 +23,9 @@ class FileBrowser extends React.Component {
   }
 
   render() {
+    if (this.state.currentPath === "") {
+      return "No root path set.";
+    }
     return (
       <div>
         <PathBar

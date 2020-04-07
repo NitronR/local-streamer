@@ -2,6 +2,7 @@ const { remote, shell } = window.require('electron');
 let fs = remote.require('fs');
 
 export function getFileList(path) {
+    if (!fs.existsSync(path)) return [];
     let dir = fs.readdirSync(path);
     let dirs = [];
     for (var child of dir) {

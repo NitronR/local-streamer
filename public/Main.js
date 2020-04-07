@@ -23,6 +23,7 @@ function createWindow() {
 
     // and load the index.html of the app. 
     if (process.env.MODE === "debug") {
+        win.dataPath = path.join(process.env.DEBUG_DATA_PATH, "")
         win.loadURL(process.env.DEBUG_URL);
     } else {
         win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);

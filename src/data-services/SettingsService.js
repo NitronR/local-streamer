@@ -8,6 +8,7 @@ export default class SettingsService {
     }
     // read settings json
     static getSettings() {
-        return new Settings(StorageService.readJson("settings.json"));
+        let settingsData = StorageService.readJson("settings.json");
+        return new Settings(settingsData.rootPath);
     }
 }
