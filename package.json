@@ -36,7 +36,8 @@
     "files": [
       "build/**/*",
       "node_modules/**/*"
-    ]
+    ],
+    "icon": "build/icon.png"
   },
   "eslintConfig": {
     "extends": "react-app"

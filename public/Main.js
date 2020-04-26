@@ -6,11 +6,15 @@ require('dotenv').config()
 
 function createWindow() {
     // Create the browser window.     
-    win = new BrowserWindow({
+
+    const iconPath = path.join(__dirname, "../build/icon.png");
+
+    let win = new BrowserWindow({
         width: 1600, height: 800,
         webPreferences: {
             nodeIntegration: true
-        }
+        },
+        icon: iconPath
     });
 
     // set dataPath property so that it can be accessed in the application
