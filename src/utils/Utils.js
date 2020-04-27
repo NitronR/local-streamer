@@ -10,3 +10,7 @@ const dateFormat = remote.require('dateformat');
 export function formatDate(date, pattern) {
     return dateFormat(date, pattern);
 }
+
+export const randomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min
+}

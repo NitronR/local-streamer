@@ -1,5 +1,8 @@
 const { remote, shell } = window.require('electron');
 let fs = remote.require('fs');
+let path = remote.require('path');
+
+export let allowedTypes = ["mp4", "mov", "avi", "wmv", "mkv", "flv"];
 
 export function getFileList(path) {
     if (!fs.existsSync(path)) return [];
@@ -16,4 +19,17 @@ export function launchFile(path) {
     shell.openItem(path);
 }
 
-export let allowedTypes = ["mp4", "mov", "avi", "wmv", "mkv", "flv"];
+// get list of all files from all subdirectories
+export function getAllFilePaths(dirPath, filterFunc = () => true) {
+    let dir = fs.readdirSync(dirPath);
+    let filePaths = [];
+    for (let child of dir) {
+        let childPath = path.join(dirPath, child);
+        if (fs.lstatSync(childPath).isDirectory()) {
+            filePaths = filePaths.concat(getAllFilePaths(childPath, filterFunc));
+        } else if (filterFunc(childPath)) {
+            filePaths.push(childPath);
+        }
+    }
+    return filePaths;
+}

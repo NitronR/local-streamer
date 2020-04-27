@@ -41,6 +41,9 @@ class FileBrowser extends React.Component {
 
               this.props.onFileItemClick(file);
             }}
+            onRandomClick={(file) => {
+              this.props.onRandomClickDir(file);
+            }}
           />
         ))}
       </div>
@@ -87,6 +90,7 @@ class FileBrowser extends React.Component {
 FileBrowser.propTypes = {
   allowedFileTypes: PropTypes.array,
   onFileItemClick: PropTypes.func,
+  onRandomClickDir: PropTypes.func,
 };
 
 const mapStateToProps = (state) => getSettingsState(state);

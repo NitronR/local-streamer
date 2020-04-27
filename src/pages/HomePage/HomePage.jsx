@@ -1,5 +1,9 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { allowedTypes, launchFile } from "../../filesystem/FileUtils";
+import {
+  allowedTypes,
+  getAllFilePaths,
+  launchFile,
+} from "../../filesystem/FileUtils";
 
 import FileBrowser from "../../components/FileBrowser";
 import React from "react";
@@ -7,12 +11,15 @@ import Recent from "../../models/Recent";
 import RecentsList from "../../components/RecentsList/RecentsList";
 import { addRecent } from "../../state/actions";
 import { connect } from "react-redux";
+import { isAllowedType } from "../../filesystem/File";
+import { randomInt } from "../../utils/Utils";
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleFileItemClick = this.handleFileItemClick.bind(this);
+    this.handleRandomClickDir = this.handleRandomClickDir.bind(this);
   }
   render() {
     return (
@@ -30,6 +37,7 @@ class HomePage extends React.Component {
             <FileBrowser
               allowedFileTypes={allowedTypes}
               onFileItemClick={this.handleFileItemClick}
+              onRandomClickDir={this.handleRandomClickDir}
             />
           </Col>
         </Row>
@@ -44,6 +52,19 @@ class HomePage extends React.Component {
       let recent = new Recent(file.path, new Date(Date.now()), false);
       this.props.addRecent(recent);
     }
+  }
+  handleRandomClickDir(file) {
+    // select a random file path
+    let filePaths = getAllFilePaths(file.path, isAllowedType);
+    let randomIndex = randomInt(0, filePaths.length - 1);
+    let randomPath = filePaths[randomIndex];
+
+    // play the random file
+    launchFile(randomPath);
+
+    // add recent
+    let recent = new Recent(randomPath, new Date(Date.now()), false);
+    this.props.addRecent(recent);
   }
 }
 
