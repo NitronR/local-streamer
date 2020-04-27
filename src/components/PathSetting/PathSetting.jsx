@@ -11,7 +11,7 @@ class PathSetting extends React.Component {
   }
   render() {
     return (
-      <Card text="white" style={{ "background-color": "#444444" }}>
+      <Card text="white" style={{ backgroundColor: "#444444" }}>
         {/* title */}
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
@@ -26,7 +26,7 @@ class PathSetting extends React.Component {
                   <div
                     style={{
                       marginTop: "0.5rem",
-                      fontWeight: "bold"
+                      fontWeight: "bold",
                     }}
                   >
                     {this.props.path}
@@ -57,7 +57,7 @@ PathSetting.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   path: PropTypes.string,
-  onPathSelect: PropTypes.func.isRequired
+  onPathSelect: PropTypes.func.isRequired,
 };
 
 export default PathSetting;

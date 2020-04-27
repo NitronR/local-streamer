@@ -3,20 +3,18 @@ import FileItem from "../FileItem";
 import PathBar from "./PathBar";
 import PropTypes from "prop-types";
 import React from "react";
-import SettingsService from "../../data-services/SettingsService";
+import { connect } from "react-redux";
 import { getFileList } from "../../filesystem/FileUtils";
+import { getSettingsState } from "../../state/selectors";
 
 class FileBrowser extends React.Component {
   constructor(props) {
     super(props);
 
-    // get settings
-    let settings = SettingsService.getSettings();
-
     // set initial state
     this.state = {
-      currentPath: settings.rootPath,
-      filePaths: this.getFilePaths(settings.rootPath),
+      currentPath: props.rootPath,
+      filePaths: this.getFilePaths(props.rootPath),
     };
 
     this.getFilePaths = this.getFilePaths.bind(this);
@@ -36,6 +34,7 @@ class FileBrowser extends React.Component {
         {/* File items */}
         {this.state.filePaths.map((path) => (
           <FileItem
+            key={path}
             path={path}
             onFileItemClick={(file) => {
               if (file.isDir) this.changePath(file.path);
@@ -90,4 +89,6 @@ FileBrowser.propTypes = {
   onFileItemClick: PropTypes.func,
 };
 
-export default FileBrowser;
+const mapStateToProps = (state) => getSettingsState(state);
+
+export default connect(mapStateToProps)(FileBrowser);

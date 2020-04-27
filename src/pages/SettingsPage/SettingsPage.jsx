@@ -5,14 +5,17 @@ import { Button, Container } from "react-bootstrap";
 
 import PathSetting from "../../components/PathSetting";
 import React from "react";
-import SettingsService from "../../data-services/SettingsService";
 import cogoToast from "cogo-toast";
+import { connect } from "react-redux";
+import { getSettingsState } from "../../state/selectors";
+import { saveSettings } from "../../state/actions";
 
 class SettingsPage extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = SettingsService.getSettings();
+    this.state = {
+      rootPath: props.rootPath,
+    };
 
     this.handleRootSelect = this.handleRootSelect.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
@@ -22,7 +25,7 @@ class SettingsPage extends React.Component {
       <Container>
         <div id="settings-card">
           {/* Settings heading */}
-          <h3 className="text-center" style={{ "margin-bottom": "1.5rem" }}>
+          <h3 className="text-center" style={{ marginBottom: "1.5rem" }}>
             Settings
           </h3>
 
@@ -52,9 +55,11 @@ class SettingsPage extends React.Component {
     this.setState({ rootPath: path });
   }
   saveSettings() {
-    SettingsService.saveSettings(this.state);
+    this.props.saveSettings(this.state);
     cogoToast.success("Settings saved.");
   }
 }
 
-export default SettingsPage;
+const mapStateToProps = (state) => getSettingsState(state);
+
+export default connect(mapStateToProps, { saveSettings })(SettingsPage);

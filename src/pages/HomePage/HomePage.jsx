@@ -5,13 +5,12 @@ import FileBrowser from "../../components/FileBrowser";
 import React from "react";
 import Recent from "../../models/Recent";
 import RecentsList from "../../components/RecentsList/RecentsList";
-import RecentsService from "../../data-services/RecentsService";
+import { addRecent } from "../../state/actions";
+import { connect } from "react-redux";
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { recents: RecentsService.getRecents() };
 
     this.handleFileItemClick = this.handleFileItemClick.bind(this);
   }
@@ -22,13 +21,7 @@ class HomePage extends React.Component {
           {/* Recents section */}
           <Col style={{ padding: "1rem" }}>
             <h2>Recents</h2>
-            <RecentsList
-              recents={this.state.recents}
-              onRecentsChange={(recents) => {
-                this.setState({ recents });
-                RecentsService.saveRecents(recents);
-              }}
-            />
+            <RecentsList />
           </Col>
 
           {/* Files section */}
@@ -48,13 +41,10 @@ class HomePage extends React.Component {
       launchFile(file.path);
 
       // add to recents
-      let recents = this.state.recents;
-      recents.unshift(new Recent(file.path, new Date(Date.now()), false));
-      this.setState({ recents: recents });
-
-      RecentsService.saveRecents(recents);
+      let recent = new Recent(file.path, new Date(Date.now()), false);
+      this.props.addRecent(recent);
     }
   }
 }
 
-export default HomePage;
+export default connect(null, { addRecent })(HomePage);

@@ -22,4 +22,7 @@ export default class Recent {
             watched: this.watched
         }
     }
+    getId() {
+        return this.path + this.date.getTime()
+    }
 }

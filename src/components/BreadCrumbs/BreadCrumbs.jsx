@@ -13,8 +13,9 @@ function BreadCrumbs(props) {
     });
   }
 
-  return breadCrumbs.map((breadCrumb) => (
+  return breadCrumbs.map((breadCrumb, index) => (
     <Button
+      key={index}
       variant="dark"
       style={{
         height: "2rem",
