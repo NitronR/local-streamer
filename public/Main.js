@@ -14,7 +14,8 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true
         },
-        icon: iconPath
+        icon: iconPath,
+        title: "Local Streamer"
     });
 
     // set dataPath property so that it can be accessed in the application
